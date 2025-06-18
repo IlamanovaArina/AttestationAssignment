@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -19,7 +20,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'rest-framework-simplejwt',
+    'rest_framework',
+    'rest_framework_simplejwt',
+
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -92,7 +96,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.User'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -108,12 +112,16 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # LOGIN_REDIRECT_URL = '/home/'
 # LOGOUT_REDIRECT_URL = '/home/'
 
-# # rest_framework_simplejwt
+# Настройки JWT-токенов
 # REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES' : [
-#         'rest_framework_simplejwt.authentication.JWTAuthentication'
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
 #     ],
 #     'DEFAULT_PERMISSION_CLASSES': [
-#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-#     ]
+#         'rest_framework.permissions.AllowAny'
+#     ],
+#     'DEFAULT_RENDERER_CLASSES': (
+#         'rest_framework.renderers.JSONRenderer',),
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 10,  # Установите желаемый размер страницы
 # }
