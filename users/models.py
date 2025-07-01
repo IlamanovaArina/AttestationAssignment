@@ -1,6 +1,10 @@
+import logging
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
+
+
+logger = logging.getLogger('users')
 
 
 class User(AbstractUser):
@@ -36,6 +40,11 @@ class User(AbstractUser):
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
+
+    def save(self, *args, **kwargs):
+        logger.info(f'Сохранение пользователя {self}')
+        super().save(*args, **kwargs)
+        logger.info(f'Пользователь {self} успешно сохранен')
 
     def __str__(self):
         return self.email
