@@ -75,7 +75,8 @@ venv\Scripts\activate     # Windows
 3. Установите зависимости
 
 ```
-pip install -r requirements.txt
+pip install poetry
+poetry install
 ```
 
 4. Настройте подключение к базе данных

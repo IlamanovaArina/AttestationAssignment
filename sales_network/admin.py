@@ -7,6 +7,7 @@ from django.utils.html import format_html
 def clear_debt(modeladmin, request, queryset):
     queryset.update(debt=0)
 
+
 @admin.register(NetworkNode)
 class NetworkNodeAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'email', 'country', 'city', 'street', 'house_number', 'node_type', 'provider',

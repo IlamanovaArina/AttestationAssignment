@@ -1,5 +1,6 @@
 from rest_framework import permissions
 
+
 class IsActiveUser(permissions.BasePermission):
     """
     Разрешает доступ только активным пользователям.

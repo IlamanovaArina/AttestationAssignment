@@ -34,7 +34,8 @@ class NetworkNodeViewSet(viewsets.ModelViewSet):
         Возвращает отсортированный по ID queryset узлов сети.
         Можно расширить для фильтрации или сортировки по другим параметрам.
         """
-        logger.info(f"Output of model objects NetworkNode (NetworkNodeViewSet)")
+
+        logger.info("Output of model objects NetworkNode (NetworkNodeViewSet)")
         return NetworkNode.objects.all().order_by('id')
 
     @action(detail=False, methods=['get'])
@@ -97,5 +98,6 @@ class ProductViewSet(viewsets.ModelViewSet):
         Возвращает отсортированный по ID queryset узлов сети.
         Можно расширить для фильтрации или сортировки по другим параметрам.
         """
-        logger.info(f"Output of model objects (ProductViewSet)")
+
+        logger.info("Output of model objects (ProductViewSet)")
         return Product.objects.all().order_by('id')
