@@ -7,6 +7,28 @@ logger = logging.getLogger('sales_network')
 
 
 class NetworkNode(models.Model):
+    """
+    Модель для хранения информации о Сетевых узлах.
+
+    Атрибуты:
+        - name (CharField): Название направления, например, кардиология, неврология.
+        - email (EmailField): Электронная почта.
+        - country (CharField): Страна
+        - city (CharField): Город
+        - street (CharField): Улица
+        - house_number (CharField): Номер дома
+        - node_type (CharField): Тип узла
+        - provider (ForeignKey): Поставщик
+        - debt (DecimalField): Задолженность перед поставщиком
+        - created_at (DateTimeField): Время создания
+        - user (ForeignKey): Пользователь
+
+    Методы:
+        - __str__: возвращает название направления для удобства отображения.
+        - get_level: метод для определения уровня сети.
+        - save: переопределён метод для сохранения объекта
+    """
+
     NODE_TYPE_CHOICES = [
         ('factory', 'Завод'),
         ('retail', 'Розничная сеть'),
@@ -30,6 +52,8 @@ class NetworkNode(models.Model):
         return self.name
 
     def get_level(self):
+        """ Метод для определения уровня сети """
+
         level = 0
         current = self
         while current.provider:
@@ -40,12 +64,27 @@ class NetworkNode(models.Model):
         return level
 
     def save(self, *args, **kwargs):
-        logger.info(f'Saving an object {self}')
+        """ Переопределение метода сохранения объекта """
+
         super().save(*args, **kwargs)
         logger.info(f'Object {self} saved successfully')
 
 
 class Product(models.Model):
+    """
+    Модель для хранения информации о продуктов.
+
+    Атрибуты:
+        - name (CharField): Название направления, например, кардиология, неврология.
+        - model (EmailField): Модель.
+        - release_date (CharField): Дата выхода на рынок.
+        - node (CharField): Звено сети.
+        - user (ForeignKey): Пользователь.
+
+    Методы:
+        - __str__: возвращает название направления для удобства отображения.
+        - save: переопределён метод для сохранения объекта
+    """
     name = models.CharField(max_length=255, verbose_name='Название продукта')
     model = models.CharField(max_length=255, verbose_name='Модель')
     release_date = models.DateField(verbose_name='Дата выхода на рынок', blank=True, null=True)
@@ -54,7 +93,6 @@ class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Пользователь')
 
     def save(self, *args, **kwargs):
-        logger.info(f'Saving an object {self}')
         super().save(*args, **kwargs)
         logger.info(f'Object {self} saved successfully')
 

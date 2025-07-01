@@ -24,10 +24,6 @@ class User(AbstractUser):
 
     Методы:
         - __str__: возвращает email пользователя для удобства отображения.
-
-    Метаданные:
-        - verbose_name: "Пользователь"
-        - verbose_name_plural: "Пользователи"
     """
     username = None
     name = models.CharField(max_length=50, verbose_name="Имя", blank=True, null=True)
